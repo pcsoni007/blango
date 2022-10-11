@@ -2,7 +2,7 @@
 {% load blog_extras %}
 {% block content %}
 
-
+<div class="contianer-fluid">
   <nav class="navbar navbar-expand-sm navbar-light bg-dark" >
     <div class="container-fluid">
         <a class="navbar-brand" href="#" style='color:white;'>
@@ -30,10 +30,11 @@
 <br/><br/>
 
     {% for post in posts %}
-    <div class="row">
-        <div class="col">
+    {% row "border-bottom" %}
+        {% col %}
             <h3>{{ post.title }}</h3>
             <small>By {{ post.author | author_details:request.user | lower}} on {{ post.published_at|date:"M, d Y" }}</small>
+           <!-- <small>By {% author_details_tag %} on {{ post.published_at|date:"M, d Y" }}</small> -->
             
             <!-- <small>By
                 {% if post.author == request.user %}
@@ -57,10 +58,10 @@
             <p>{{ post.summary }}</p>
             <p>
                 ({{ post.content|wordcount }} words)
-                <a href="#">Read More</a>
+                <a href="{% url 'post_detail' post.slug %}">Read More</a>
             </p>
-        </div>
-    </div>
+        {% endcol %}
+    {% endrow %}
     {% endfor %}
 
   <br/><br/>
@@ -78,5 +79,5 @@
         <a class="page-link" href="#">Next</a>
     </li>
 </ul>
-
+</div>
 {% endblock %}

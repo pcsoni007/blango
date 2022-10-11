@@ -20,4 +20,6 @@ import blog.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', blog.views.index),
+    path("bootstrap/", blog.views.bootstrap),
+    path("post/<slug>/", blog.views.getPostDetails, name="post_detail"),
 ]
